@@ -57,7 +57,7 @@ async function getProfile() {
                                             <h2>HI!</h2>
                                             <h2>My name is ${userName}</h2>
                                             <p>Currently @ ${company}</p>
-                                            <a href=""><i class="fas fa-location-arrow"></i> ${userLocal}</a>
+                                            <a href="https://www.google.com/maps/place/${userLocal}"><i class="fas fa-location-arrow"></i> ${userLocal}</a>
                                             <a href="${githubProfile}" id="buffer"><i class="fab fa-github"></i> Github</a>
                                             <a href="${userBlog}"><i class="fas fa-rss"></i> Blog</a>
                                         </div>
@@ -77,13 +77,13 @@ async function getProfile() {
                                         <div class="col-lg-6">
                                             <div class="statsCont1">
                                                 <h4>Public Repositories</h4>
-                                                <p>**DATA**</p>
+                                                <p>${publicRepos}</p>
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="statsCont2">
                                                 <h4>Followers</h4>
-                                                <p>**DATA**</p>
+                                                <p>${followers}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -91,13 +91,13 @@ async function getProfile() {
                                         <div class="col-lg-6">
                                             <div class="statsCont1">
                                                 <h4>GitHub Stars</h4>
-                                                <p>**DATA**</p>
+                                                <p>${userStars}</p>
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="statsCont2">
                                                 <h4>Following</h4>
-                                                <p>**DATA**</p>
+                                                <p>${following}</p>
                                             </div>
                                         </div>
                                     </div>
