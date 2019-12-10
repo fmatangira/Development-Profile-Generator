@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Developer Profile</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/96ca6c3009.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container topCont">
+        <div class="row">
+            <div class="col-lg-3 d-flex justify-content-center picCont">
+                <img src="https://avatars0.githubusercontent.com/u/2?v=4" alt="github avatar" id="avatar">
+            </div>
+            <div class="col-lg-9 introCont">
+                <div class="introContent">
+                    <h2>HI!</h2>
+                    <h2>My name is **NAME**</h2>
+                    <p>Currently @ **COMPANY**</p>
+                    <a href=""><i class="fas fa-location-arrow"></i> **LOCATION**</a>
+                    <a href="" id="buffer"><i class="fab fa-github"></i> **GITHUB**</a>
+                    <a href=""><i class="fas fa-rss"></i> **BLOG**</a>
+                </div>
+                
+            </div>
+        </div>
+        <div class="container bottomCont">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="statsCont1">
+                        <h4>Public Repositories:</h4>
+                        <p>**DATA**</p>
+                    </div>
+                    
+                </div>
+                <div class="col-lg-6">
+                    <div class="statsCont2">
+                        <h4>Public Repositories:</h4>
+                        <p>**DATA**</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+    ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| CSS |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+    ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+
+    <style>
+        body {
+            background-color: black;
+        }
+
+        a {
+            color: #3a3535;
+            text-decoration: none;
+        }
+
+        #buffer {
+            padding: 0 20px;
+        }
+        .topCont {
+            margin-top: 40px;
+        }
+
+        .introCont {
+            background-color: #ff7315;
+            text-align: center;
+            color: white;
+            border-radius: 30px;
+        }
+
+        .introContent {
+            padding-top: 20px;
+        }
+
+        #avatar { 
+            border-radius: 30%;
+            border: 5px solid #ff7315;
+        }
+
+        .bottomCont {
+            color: #ff7315;
+            margin-top: 40px;
+            text-align: center;
+            background-color: green;
+        }
+
+        .statsCont1,.statsCont2 {
+            background-color: #3a3535;
+            /* margin: 0 30px; */
+            padding: 20px;
+        }
+
+        .statsCont1 {
+            margin-left: 30px;
+        }
+
+        .statsCont2 {
+            margin-right: 30px;
+        }
+    </style>
+</body>
+</html>
