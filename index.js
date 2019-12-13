@@ -2,7 +2,14 @@ const axios = require('axios');
 const inquirer = require('inquirer');
 const util = require('util');
 const fs = require('fs');
+const pdf = require('html-pdf');
+var html = fs.readFileSync('index.html', 'utf8');
 const writeFileAsync = util.promisify(fs.writeFile);
+var options = { 
+    format: 'Letter',
+    zoomFactor: 5
+};
+
 
 getProfile();
 
@@ -13,7 +20,9 @@ async function getProfile() {
             type: 'input',
             name: 'username',
             message: 'What is your Github username?'
-        }).then(function ({ username }) {
+        }).then(function ({
+            username
+        }) {
             const queryUrl = `https://api.github.com/users/${username}`;
             const githubUrl = `https://www.github.com/${username}`
 
@@ -190,26 +199,20 @@ async function getProfile() {
                 }
 
                 // WRITE generateHtml() TO index.html
-                writeFile();
-
-                async function writeFile() {
-                    try{
-                        await writeFileAsync('index.html', generateHtml(), function (err) {
-                            if (err) throw err;
-                            console.log('Saved!');
-                          });
-                    } catch (err) {
-                        console.log('Error: ', err);
-                        
-                    }
-                }
+                writeFileAsync('index.html', generateHtml());
+                console.log('The index.html has been written.');
                 // console.log(generateHtml());
             });
         })
+        
+        // pdf.convertHTMLFile('index.html', 'index.pdf');
+        pdf.create(html, options).toFile('index.pdf', function(err, res) {
+            if (err) return console.log(err);
+            console.log(res)
+        });
+
     } catch (err) {
         console.log('ERROR: ', err);
     }
-
-    // console.log(username);
 
 }
