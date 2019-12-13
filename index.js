@@ -5,7 +5,7 @@ const fs = require('fs');
 const pdf = require('html-pdf');
 var html = fs.readFileSync('index.html', 'utf8');
 const writeFileAsync = util.promisify(fs.writeFile);
-var options = { 
+var options = {
     format: 'Letter',
     zoomFactor: 5
 };
@@ -16,25 +16,32 @@ getProfile();
 async function getProfile() {
     try {
         // PROMPT USER FOR GITHUB USERNAME
-        await inquirer.prompt({
-            type: 'input',
-            name: 'username',
-            message: 'What is your Github username?'
-        }).then(function ({
-            username
-        }) {
+        await inquirer.prompt([
+            {
+                type: 'input',
+                name: 'username',
+                message: 'What is your Github username?'
+            },
+            {
+                type: 'input',
+                name: 'color',
+                message:'What is your favorite color?'
+            }
+        ]).then(function ({ username,color }) {
             const queryUrl = `https://api.github.com/users/${username}`;
+            const starsURL = `https://api.github.com/users/${username}/starred`
             const githubUrl = `https://www.github.com/${username}`
-
+            const userColor = color
             // CONNECT TO GITHUB API
-            axios.get(queryUrl).then(function (data) {
+            return Promise.all([axios.get(queryUrl),axios.get(starsURL)]).then(([data,data2]) => {
 
                 var profile = data.data
+                var starred = data2.data;
                 var githubDetails = [profile.avatar_url, profile.name, profile.company, profile.location, githubUrl, profile.blog, profile.bio, profile.public_repos, profile.followers, profile.public_gists, profile.following];
-
+                var githubDetails2 = [starred.length]
                 // DECONSTRUCT githubDetails
-                var [profilePic, userName, company, userLocal, githubProfile, userBlog, userBio, publicRepos, followers, userStars, following] = githubDetails;
-                console.log(profilePic, userName, company, userLocal, githubProfile, userBlog, userBio, publicRepos, followers, userStars, following);
+                var [profilePic, userName, company, userLocal, githubProfile, userBlog, userBio, publicRepos, followers, following] = githubDetails;
+                var [githubStars] = githubDetails2
                 // console.log(profile);
 
                 // APP HTML
@@ -100,7 +107,7 @@ async function getProfile() {
                                         <div class="col-lg-6">
                                             <div class="statsCont1">
                                                 <h4>GitHub Stars</h4>
-                                                <p>${userStars}</p>
+                                                <p>${githubStars}</p>
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
@@ -179,7 +186,7 @@ async function getProfile() {
                         
                                 .statsCont1,
                                 .statsCont2 {
-                                    background-color: #3a3535;
+                                    background-color: ${userColor};
                                     /* margin: 0 30px; */
                                     /* vertical-align: middle; */
                                     padding: 20px;
@@ -201,12 +208,13 @@ async function getProfile() {
                 // WRITE generateHtml() TO index.html
                 writeFileAsync('index.html', generateHtml());
                 console.log('The index.html has been written.');
+                
                 // console.log(generateHtml());
             });
         })
-        
+
         // pdf.convertHTMLFile('index.html', 'index.pdf');
-        pdf.create(html, options).toFile('index.pdf', function(err, res) {
+        pdf.create(html, options).toFile('index.pdf', function (err, res) {
             if (err) return console.log(err);
             console.log(res)
         });
